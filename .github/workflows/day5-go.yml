@@ -1,0 +1,32 @@
+name: Go Day 5
+
+on:
+  push:
+    paths:
+      - 'day5/**'
+      - '.github/workflows/day5-go.yml'
+  pull_request:
+    paths:
+      - 'day5/**'
+      - '.github/workflows/day5-go.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.22'
+
+      - name: Build
+        working-directory: ./day5
+        run: go build -v ./...
+
+      - name: Run
+        working-directory: ./day5
+        run: go run .

@@ -1,0 +1,32 @@
+name: Go Day 7
+
+on:
+  push:
+    paths:
+      - 'day7/**'
+      - '.github/workflows/day7-go.yml'
+  pull_request:
+    paths:
+      - 'day7/**'
+      - '.github/workflows/day7-go.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.22'
+
+      - name: Build
+        working-directory: ./day7
+        run: go build -v ./...
+
+      - name: Run
+        working-directory: ./day7
+        run: go run .
